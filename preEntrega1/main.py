@@ -1,4 +1,4 @@
-import json
+import json,time
 
 path_db = 'database.json'
 
@@ -30,10 +30,7 @@ def create_user(file,db_json, username, password):
     file.close()
     return f"Usuario {username} creado con exito"
 
-
-db_json = database("r")
-
-def register():
+def register(db_json):
     database_file = database("w")
     username = input("Ingrese nombre de usuario: ")
     if(search(db_json,username)):
@@ -42,15 +39,38 @@ def register():
         password = input("Ingrese su password: ")
         print(create_user(database_file,db_json,username,password))
 
-def login():
+def login(db_json):
     username = input("Ingrese su usuario: ")
     password = input("Ingrese su password: ")
     user = search(db_json, username)
-    if (user['password'] == password):
-        print(f"Bienvenido {user['username']}")
-    else:
-        print("Datos incorrectos")
+    try:
+        if (user['password'] == password):
+            print(f"Bienvenido {user['username']}")
+        else:
+            print("Datos incorrectos")
+    except:
+        print("Usuario inexistente")
 
 
+db_json = database("r")
+status = ""
+def Main():
+    print("Bienvenido al portal")
+    print("Ingrese alguna de las siguientes opciones")
+    print("1 - Login")
+    print("2 - Crear nuevo usuario")
+    print("3 - Salir")
 
-#login()
+    status = input("Ingrese la opcion deseada: ")
+    if status == "1":
+        login(db_json)
+        time.sleep(2)
+    elif status == "2":
+        register(db_json)
+        time.sleep(2)
+    elif status == "3":
+        print("Hasta luego")
+        return status
+
+while status != "3":            
+    status = Main()
