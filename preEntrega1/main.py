@@ -53,7 +53,7 @@ def login(db_json):
 
 
 db_json = database("r")
-status = ""
+opt = ""
 def Main():
     print("Bienvenido al portal")
     print("Ingrese alguna de las siguientes opciones")
@@ -61,16 +61,16 @@ def Main():
     print("2 - Crear nuevo usuario")
     print("3 - Salir")
 
-    status = input("Ingrese la opcion deseada: ")
-    if status == "1":
+    opt = input("Ingrese la opcion deseada: ")
+    if opt == "1":
         login(db_json)
         time.sleep(2)
-    elif status == "2":
+    elif opt == "2":
         register(db_json)
         time.sleep(2)
-    elif status == "3":
+    elif opt == "3":
         print("Hasta luego")
-        return status
+        return opt
 
-while status != "3":            
-    status = Main()
+while opt != "3":            
+    opt = Main()
